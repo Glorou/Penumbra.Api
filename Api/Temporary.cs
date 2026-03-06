@@ -145,4 +145,9 @@ public interface IPenumbraApiTemporary
     /// and Success, InvalidArgument if the game object does not exist, ModMissing, or TemporarySettingDisallowed if the used key was > 0 and different from the provided key.
     /// </returns>
     public (PenumbraApiEc ErrorCode, (bool, bool, int, Dictionary<string, List<string>>)? Settings, string Source) QueryTemporaryModSettingsPlayer(int objectIndex, string modDirectory, string modName, int key);
+
+    public PenumbraApiEc AddTemporaryCollectionInheritance(Guid inheritor, Guid parent);
+    
+    public PenumbraApiEc RemoveTemporaryCollectionInheritance(Guid inheritor, Guid parent);
+
 }

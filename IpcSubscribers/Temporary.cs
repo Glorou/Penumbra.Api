@@ -337,3 +337,42 @@ public sealed class QueryTemporaryModSettingsPlayer(IDalamudPluginInterface pi)
             return ((int)ex, settings, source);
         });
 }
+
+/// <inheritdoc cref="IPenumbraApiTemporary.AddTemporaryCollectionInheritance"/>
+public sealed class AddTemporaryCollectionInheritance(IDalamudPluginInterface pi)
+    : FuncSubscriber<Guid, Guid, int>(pi, Label)
+{
+    /// <summary> The label. </summary>
+    public const string Label = $"Penumbra.{nameof(AddTemporaryCollectionInheritance)}.V1";
+
+    /// <summary> The label as UTF8 string. </summary>
+    public static ReadOnlySpan<byte> LabelU8
+        => "Penumbra.AddTemporaryCollectionInheritance.V1"u8;
+
+    /// <inheritdoc cref="IPenumbraApiTemporary.AddTemporaryCollectionInheritance"/>
+    public PenumbraApiEc Invoke(Guid inheritor, Guid parent)
+        => (PenumbraApiEc)base.Invoke(inheritor, parent);
+
+    /// <summary> Create a provider. </summary>
+    public static FuncProvider<Guid, Guid, int> Provider(IDalamudPluginInterface pi, IPenumbraApiTemporary api)
+        => new(pi, Label, (a,b) => (int)api.AddTemporaryCollectionInheritance(a, b));
+}
+
+public sealed class RemoveTemporaryCollectionInheritance(IDalamudPluginInterface pi)
+    : FuncSubscriber<Guid, Guid, int>(pi, Label)
+{
+    /// <summary> The label. </summary>
+    public const string Label = $"Penumbra.{nameof(RemoveTemporaryCollectionInheritance)}.V1";
+
+    /// <summary> The label as UTF8 string. </summary>
+    public static ReadOnlySpan<byte> LabelU8
+        => "Penumbra.RemoveTemporaryCollectionInheritance.V1"u8;
+
+    /// <inheritdoc cref="IPenumbraApiTemporary.RemoveTemporaryCollectionInheritance"/>
+    public PenumbraApiEc Invoke(Guid inheritor, Guid parent)
+        => (PenumbraApiEc)base.Invoke(inheritor, parent);
+
+    /// <summary> Create a provider. </summary>
+    public static FuncProvider<Guid, Guid, int> Provider(IDalamudPluginInterface pi, IPenumbraApiTemporary api)
+        => new(pi, Label, (a,b) => (int)api.RemoveTemporaryCollectionInheritance(a, b));
+}
